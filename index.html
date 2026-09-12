@@ -55,7 +55,7 @@
       margin-bottom: 5px;
     }
 
-    input[type="text"], input[type="email"] {
+    input[type="text"], input[type="tel"] {
       width: 100%;
       padding: 10px;
       box-sizing: border-box;
@@ -175,7 +175,7 @@
 
 <div class="container">
   <header>
-    <h1>ONLINE FREE WB TET(INSERVICE) Mock Test 5 (For full length mock test contact-9732974125) </h1>
+    <h1>ONLINE FREE WB TET(INSERVICE) Mock Test 5 (For full length mock test contact-9732974125)</h1>
   </header>
 
   <div id="registration-section">
@@ -184,8 +184,8 @@
       <input type="text" id="student-name" placeholder="Enter your full name" required>
     </div>
     <div class="form-group">
-      <label for="student-phone number">phone number:</label>
-      <input type="phone number" id="student-phone number" placeholder="Enter your phone number" required>
+      <label for="student-phone">Mobile Number:</label>
+      <input type="tel" id="student-phone" placeholder="Enter your mobile number" required>
     </div>
     <button class="btn" onclick="startTest()">Start Test</button>
   </div>
@@ -207,10 +207,10 @@
 </div>
 
 <script>
-  // Paste your published Google Apps Script Web App URL here
+  // Google Apps Script Web App URL
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz7CZxbkjafyioC3T1ejJ_Z_BQ9yTbnidHvOisQeolYjAwhFRGjLFC7Es2q9FHo1rFM/exec";
 
-  // Question Dataset (50 MCQs from CTET MOCK TEST 5)
+  // Question Dataset (50 MCQs)
   const questions = [
     { id: 1, q: "1. শিশুর বিকাশের কোন ক্ষেত্রটি আবেগ অনুভব ও নিয়ন্ত্রণ করার ক্ষমতার সঙ্গে সম্পর্কিত?", options: { A: "শারীরিক বিকাশ", B: "আবেগীয় বিকাশ", C: "ভাষাগত বিকাশ", D: "নৈতিক বিকাশ" }, ans: "B" },
     { id: 2, q: "2. According to Piaget, the ability to understand conservation generally develops during which stage?", options: { A: "Sensorimotor stage", B: "Pre-operational stage", C: "Concrete operational stage", D: "Formal operational stage" }, ans: "C" },
@@ -298,10 +298,10 @@
 
   function startTest() {
     const name = document.getElementById('student-name').value.trim();
-    const email = document.getElementById('student-email').value.trim();
+    const phone = document.getElementById('student-phone').value.trim();
 
-    if (!name || !email) {
-      alert("Please fill in both Name and Email to start the test.");
+    if (!name || !phone) {
+      alert("Please fill in both Name and Mobile Number to start the test.");
       return;
     }
 
@@ -344,12 +344,12 @@
       const radios = document.getElementsByName(`q${item.id}`);
       radios.forEach(r => r.disabled = true);
 
-      // $+1$ for correct answer, no negative marking[cite: 1]
+      // +1 for correct answer, 0 for wrong answer
       if (userAns === correctAns) {
         score++;
       }
 
-      // Preview coloring: Correct = Green, Wrong attempt = Red[cite: 1]
+      // Preview coloring: Correct = Green, Wrong attempt = Red
       if (userAns) {
         if (userAns === correctAns) {
           document.getElementById(`lbl-${item.id}-${userAns}`).classList.add('opt-correct');
@@ -358,7 +358,7 @@
           document.getElementById(`lbl-${item.id}-${correctAns}`).classList.add('opt-correct');
         }
       } else {
-        // If question was skipped, show the correct answer in green
+        // If skipped, highlight correct answer in green
         document.getElementById(`lbl-${item.id}-${correctAns}`).classList.add('opt-correct');
       }
     });
@@ -367,11 +367,11 @@
     document.getElementById('result-box').style.display = 'block';
     document.getElementById('score-text').innerHTML = `Your Score: <strong>${score} / ${questions.length}</strong>`;
     
-    // Hide top timer and submit button
+    // Hide sticky timer and submit button
     document.getElementById('timer-sticky').style.display = 'none';
     form.querySelector('button[type="button"]').style.display = 'none';
 
-    // Send result to Google Sheet[cite: 1]
+    // Send payload to Google Sheet
     sendToGoogleSheet(score);
   }
 
@@ -382,11 +382,11 @@
     }
 
     const name = document.getElementById('student-name').value;
-    const email = document.getElementById('student-email').value;
+    const phone = document.getElementById('student-phone').value;
 
     const payload = {
       name: name,
-      email: email,
+      phone: phone,
       score: score,
       total: questions.length,
       timestamp: new Date().toLocaleString()
