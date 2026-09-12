@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MM TET ACADEMY 9732974125 ONLINE FREE WB TET(INSERVICE) Mock Test 5</title>
+  <style>
+    :root {
+      --bg-color: #f4f7f6;
+      --card-bg: #ffffff;
+      --primary: #2c3e50;
+      --accent: #2980b9;
+      --correct: #27ae60;
+      --wrong: #c0392b;
+      --text: #333333;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    header {
+      border-bottom: 2px solid #eee;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"], input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    #timer-sticky {
+      position: sticky;
+      top: 0;
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+      padding: 12px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      z-index: 100;
+    }
+
+    .question-card {
+      background: #fafafa;
+      border: 1px solid #e0e0e0;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+    }
+
+    .question-title {
+      font-weight: bold;
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+
+    .options-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .options-list li {
+      margin-bottom: 8px;
+    }
+
+    .options-list label {
+      font-weight: normal;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 4px;
+      background: #fff;
+      border: 1px solid #ddd;
+      transition: background 0.2s;
+    }
+
+    .options-list label:hover {
+      background: #f0f0f0;
+    }
+
+    .options-list input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    /* Styles for Preview Result Mode */
+    .opt-correct {
+      background-color: #d4edda !important;
+      color: var(--correct) !important;
+      border-color: #c3e6cb !important;
+      font-weight: bold;
+    }
+
+    .opt-wrong {
+      background-color: #f8d7da !important;
+      color: var(--wrong) !important;
+      border-color: #f5c6cb !important;
+      font-weight: bold;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background-color: var(--accent);
+      color: #fff;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #1a5276;
+    }
+
+    #result-box {
+      display: none;
+      background: #e8f8f5;
+      border: 1px solid #a3e4d7;
+      padding: 20px;
+      border-radius: 6px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    #result-box h2 {
+      margin-top: 0;
+      color: #117a65;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>ONLINE FREE WB TET(INSERVICE) Mock Test 5 (For full length mock test contact-9732974125) </h1>
+  </header>
+
+  <div id="registration-section">
+    <div class="form-group">
+      <label for="student-name">Full Name:</label>
+      <input type="text" id="student-name" placeholder="Enter your full name" required>
+    </div>
+    <div class="form-group">
+      <label for="student-phone number">phone number:</label>
+      <input type="phone number" id="student-phone number" placeholder="Enter your phone number" required>
+    </div>
+    <button class="btn" onclick="startTest()">Start Test</button>
+  </div>
+
+  <div id="test-section" style="display: none;">
+    <div id="timer-sticky">Time Remaining: <span id="time-display">40:00</span></div>
+    
+    <form id="quiz-form">
+      <div id="questions-container"></div>
+      <button type="button" class="btn" onclick="submitTest()">Submit Test</button>
+    </form>
+  </div>
+
+  <div id="result-box">
+    <h2>Test Completed!</h2>
+    <p id="score-text"></p>
+    <p>Scroll down to review your answers.</p>
+  </div>
+</div>
+
+<script>
+  // Paste your published Google Apps Script Web App URL here
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz7CZxbkjafyioC3T1ejJ_Z_BQ9yTbnidHvOisQeolYjAwhFRGjLFC7Es2q9FHo1rFM/exec";
+
+  // Question Dataset (50 MCQs from CTET MOCK TEST 5)
+  const questions = [
+    { id: 1, q: "1. শিশুর বিকাশের কোন ক্ষেত্রটি আবেগ অনুভব ও নিয়ন্ত্রণ করার ক্ষমতার সঙ্গে সম্পর্কিত?", options: { A: "শারীরিক বিকাশ", B: "আবেগীয় বিকাশ", C: "ভাষাগত বিকাশ", D: "নৈতিক বিকাশ" }, ans: "B" },
+    { id: 2, q: "2. According to Piaget, the ability to understand conservation generally develops during which stage?", options: { A: "Sensorimotor stage", B: "Pre-operational stage", C: "Concrete operational stage", D: "Formal operational stage" }, ans: "C" },
+    { id: 3, q: "3. শিক্ষার্থীদের শেখার জন্য উৎসাহিত করার ক্ষেত্রে কোনটি সবচেয়ে কার্যকর?", options: { A: "ভয় দেখানো", B: "অর্থপূর্ণ ও চ্যালেঞ্জিং কাজ প্রদান করা", C: "শাস্তি দেওয়া", D: "সব উত্তর মুখস্থ করানো" }, ans: "B" },
+    { id: 4, q: "4. IQ-এর পূর্ণরূপ কী?", options: { A: "Intelligence Quality", B: "Intelligence Quotient", C: "Intelligent Question", D: "Intelligence Questioning" }, ans: "B" },
+    { id: 5, q: "5. শিশুর বিকাশের ক্ষেত্রে ‘individual differences’ বলতে কী বোঝায়?", options: { A: "সব শিশু একইভাবে শেখে", B: "শিশুদের সক্ষমতা, আগ্রহ ও শেখার গতিতে পার্থক্য থাকে", C: "শুধু শারীরিক পার্থক্য থাকে", D: "শুধু বয়সের পার্থক্য থাকে" }, ans: "B" },
+    { id: 6, q: "6. একটি শিশু মনে করে যে লম্বা গ্লাসে জল ঢাললে জলের পরিমাণ বেড়ে যায়, যদিও একই পরিমাণ জল আগে ছোট গ্লাসে ছিল। এটি কোন ধারণার অভাব নির্দেশ করে?", options: { A: "Classification", B: "Conservation", C: "Seriation", D: "Reversibility" }, ans: "B" },
+    { id: 7, q: "7. পিয়াজের মতে, ‘schema’ বলতে কী বোঝায়?", options: { A: "শিক্ষকের তৈরি lesson plan", B: "অভিজ্ঞতাকে সংগঠিত করার মানসিক কাঠামো", C: "শিক্ষার্থীর পরীক্ষার ফল", D: "ভাষাগত নিয়মের তালিকা" }, ans: "B" },
+    { id: 8, q: "8. Vygotsky-এর মতে, শিশুর cognitive development-এর ক্ষেত্রে কোন বিষয়টির বিশেষ গুরুত্ব রয়েছে?", options: { A: "শুধুমাত্র biological maturation", B: "সামাজিক মিথস্ক্রিয়া ও সাংস্কৃতিক পরিবেশ", C: "শুধুমাত্র ব্যক্তিগত অভিজ্ঞতা", D: "শুধুমাত্র reinforcement" }, ans: "B" },
+    { id: 9, q: "9. একজন শিক্ষক প্রথমে একটি সমস্যা সমাধানের পদ্ধতি দেখিয়ে দেন। পরে শিক্ষার্থীদের নিজে একই ধরনের সমস্যা সমাধান করতে বলেন এবং ধীরে ধীরে সাহায্য কমিয়ে দেন। এটি কোন ধারণার উদাহরণ?", options: { A: "Scaffolding", B: "Conditioning", C: "Punishment", D: "Trial and error" }, ans: "A" },
+    { id: 10, q: "10. Bandura-এর মতে, কোনো আচরণ শেখার জন্য প্রত্যক্ষ reinforcement সবসময় প্রয়োজনীয় নয়। এর কারণ কী?", options: { A: "শিশুরা শুধুমাত্র জন্মগত আচরণ শেখে", B: "শিশুরা অন্যের আচরণ পর্যবেক্ষণ করেও শিখতে পারে", C: "reinforcement কখনো কাজ করে না", D: "শেখা শুধুমাত্র trial and error-এর মাধ্যমে হয়" }, ans: "B" },
+    { id: 11, q: "11. একজন শিক্ষার্থী পরীক্ষায় কম নম্বর পাওয়ার পর বলে, “আমি এবার কীভাবে পড়লে ভালো করতে পারতাম তা বুঝতে পেরেছি।” এটি কোন ধরনের learning orientation নির্দেশ করে?", options: { A: "Performance avoidance", B: "Mastery orientation", C: "Learned helplessness", D: "External motivation" }, ans: "B" },
+    { id: 12, q: "12. একজন শিক্ষার্থী মনে করে যে তার ব্যর্থতার কারণ তার নিজের প্রচেষ্টার অভাব এবং সে পরেরবার বেশি চেষ্টা করলে সফল হতে পারবে। এটি কোন attribution-এর উদাহরণ?", options: { A: "Internal and controllable", B: "External and uncontrollable", C: "Internal and uncontrollable", D: "External and controllable" }, ans: "A" },
+    { id: 13, q: "13. ‘Learned helplessness’ দেখা দিতে পারে যখন শিক্ষার্থী—", options: { A: "বারবার সাফল্য পায়", B: "বারবার ব্যর্থতার অভিজ্ঞতা পেয়ে মনে করে যে তার কোনো নিয়ন্ত্রণ নেই", C: "সবসময় নিজের পছন্দের কাজ করে", D: "সহযোগিতামূলকভাবে শেখে" }, ans: "B" },
+    { id: 14, q: "14. Kohlberg-এর নৈতিক বিকাশের তত্ত্বে একজন ব্যক্তি যখন সামাজিক নিয়ম মেনে চলে কারণ সে সমাজের শৃঙ্খলা বজায় রাখাকে গুরুত্বপূর্ণ মনে করে, তখন সেটি কোন orientation-এর সঙ্গে সম্পর্কিত?", options: { A: "Punishment orientation", B: "Instrumental orientation", C: "Law and order orientation", D: "Universal ethical principle orientation" }, ans: "C" },
+    { id: 15, q: "15. একজন শিক্ষক শিক্ষার্থীদের একটি নৈতিক dilemma দিয়ে জিজ্ঞাসা করেন, “তুমি এই সিদ্ধান্তের পক্ষে বা বিপক্ষে কেন?” এই কার্যক্রমটি প্রধানত কী বিকাশ করে?", options: { A: "নৈতিক reasoning", B: "Motor coordination", C: "Rote memory", D: "Language fluency only" }, ans: "A" },
+    { id: 16, q: "16. Gardner-এর Multiple Intelligence Theory অনুযায়ী একজন শিক্ষার্থী ছন্দ, সুর ও সংগীতের pattern খুব ভালোভাবে বুঝতে পারে। এটি কোন intelligence-এর উদাহরণ?", options: { A: "Spatial intelligence", B: "Musical intelligence", C: "Bodily-kinaesthetic intelligence", D: "Interpersonal intelligence" }, ans: "B" },
+    { id: 17, q: "17. একজন শিক্ষার্থী অন্যদের অনুভূতি সহজেই বুঝতে পারে এবং তাদের সঙ্গে কার্যকরভাবে যোগাযোগ করতে পারে। Gardner-এর তত্ত্ব অনুযায়ী এটি কোন intelligence-এর সঙ্গে সম্পর্কিত?", options: { A: "Intrapersonal", B: "Interpersonal", C: "Linguistic", D: "Spatial" }, ans: "B" },
+    { id: 18, q: "18. Creativity-এর ক্ষেত্রে ‘divergent thinking’ বলতে কী বোঝায়?", options: { A: "একটি নির্দিষ্ট উত্তর খুঁজে বের করা", B: "একটি সমস্যার একাধিক সম্ভাব্য সমাধান তৈরি করা", C: "তথ্য হুবহু মনে রাখা", D: "শুধুমাত্র নিয়ম অনুসরণ করা" }, ans: "B" },
+    { id: 19, q: "19. একজন শিক্ষক শিক্ষার্থীদের একটি প্রশ্নের যত বেশি যুক্তিসঙ্গত উত্তর সম্ভব তৈরি করতে বলেন। এই কার্যক্রমে কোন creative thinking skill বেশি ব্যবহৃত হয়?", options: { A: "Divergent thinking", B: "Convergent thinking", C: "Rote memory", D: "Recognition" }, ans: "A" },
+    { id: 20, q: "20. Inclusive classroom-এ একজন দৃষ্টিপ্রতিবন্ধী শিক্ষার্থীর জন্য Braille material প্রদান করা কোন principle-এর সঙ্গে সবচেয়ে বেশি সম্পর্কিত?", options: { A: "Equal treatment", B: "Equity and accessibility", C: "Competition", D: "Standardisation" }, ans: "B" },
+    { id: 21, q: "21. একজন শিক্ষক একই বিষয় শেখানোর সময় visual, auditory এবং tactile activities ব্যবহার করেন। এর প্রধান উদ্দেশ্য কী?", options: { A: "একটি নির্দিষ্ট learning style-কে সবসময় অনুসরণ করা", B: "শিক্ষার্থীদের বিভিন্ন উপায়ে শেখার সুযোগ দেওয়া", C: "assessment বাদ দেওয়া", D: "textbook-এর ব্যবহার বন্ধ করা" }, ans: "B" },
+    { id: 22, q: "22. ADHD-যুক্ত একজন শিক্ষার্থীর জন্য কোন classroom strategy সবচেয়ে উপযুক্ত?", options: { A: "দীর্ঘ সময় ধরে একই ধরনের কাজ করানো", B: "স্পষ্ট, ছোট ও ধাপে বিভক্ত task দেওয়া", C: "তাকে সবসময় একা বসানো", D: "তার আচরণ উপেক্ষা করা" }, ans: "B" },
+    { id: 23, q: "23. একজন শিক্ষক একটি পরীক্ষার মাধ্যমে শিক্ষার্থীরা কোন ধারণাগুলি ভুল বুঝেছে তা শনাক্ত করেন এবং পরবর্তী শিক্ষণ সেই অনুযায়ী পরিবর্তন করেন। এটি কোন ধরনের assessment-এর কার্যকর ব্যবহার?", options: { A: "Assessment for learning", B: "Assessment of learning only", C: "Norm-referenced assessment", D: "Summative certification" }, ans: "A" },
+    { id: 24, q: "24. একটি শিশু কোনো প্রশ্নের উত্তর দেওয়ার আগে বলে, “আমি প্রথমে প্রশ্নটি বুঝব, তারপর কোন তথ্য দরকার তা ঠিক করব।” এটি কোন দক্ষতার উদাহরণ?", options: { A: "Metacognition regulation", B: "Classical conditioning", C: "Social conformity", D: "Rote memorisation" }, ans: "A" },
+    { id: 25, q: "25. একজন শিক্ষক লক্ষ্য করেন যে ছেলেদের বিজ্ঞান-সংক্রান্ত কাজের সুযোগ বেশি দেওয়া হচ্ছে এবং মেয়েদের কাছ থেকে একই ধরনের অংশগ্রহণ প্রত্যাশা করা হচ্ছে না। শিক্ষক কী করবেন?", options: { A: "পরিস্থিতি অপরিবর্তিত রাখবেন", B: "ছেলেদের বেশি সুযোগ দেবেন", C: "gender-neutral ও সমান অংশগ্রহণ নিশ্চিত করবেন", D: "মেয়েদের জন্য আলাদা সহজ কাজ দেবেন" }, ans: "C" },
+    { id: 26, q: "26. If I ______ you, I would accept the offer.", options: { A: "am", B: "was", C: "were", D: "had been" }, ans: "C" },
+    { id: 27, q: "27. Choose the antonym of “Benevolent”.", options: { A: "Generous", B: "Compassionate", C: "Malevolent", D: "Helpful" }, ans: "C" },
+    { id: 28, q: "28. Fill in the blank with the appropriate article: “He is ___ university student.”", options: { A: "a", B: "an", C: "the", D: "no article" }, ans: "A" },
+    { id: 29, q: "29. Choose the correct preposition: “The committee consists ___ five members.”", options: { A: "with", B: "from", C: "of", D: "by" }, ans: "C" },
+    { id: 30, q: "30. Choose the correct sentence.", options: { A: "Hardly had I reached the station when the train left.", B: "Hardly I had reached the station when the train left.", C: "Hardly had I reached the station than the train left.", D: "Hardly I reached the station when the train had left." }, ans: "A" },
+    { id: 31, q: "31. Choose the correct improvement: “No sooner did he arrive when the meeting started.”", options: { A: "No sooner did he arrive than the meeting started.", B: "No sooner he arrived than the meeting started.", C: "No sooner did he arrived when the meeting started.", D: "No sooner had he arrive than the meeting started." }, ans: "A" },
+    { id: 32, q: "32. Choose the word which is closest in meaning to “Pragmatic”.", options: { A: "Idealistic", B: "Practical", C: "Emotional", D: "Imaginative" }, ans: "B" },
+    { id: 33, q: "33. Choose the correct form: “Had I known about the problem, I ___ you.”", options: { A: "will help", B: "would help", C: "would have helped", D: "had helped" }, ans: "C" },
+    { id: 34, q: "34. A learner uses the sentence “He goed to school yesterday.” This error is best understood as:", options: { A: "Random failure without any pattern", B: "Evidence of overgeneralisation during language development", C: "Lack of intelligence", D: "Failure of listening only" }, ans: "B" },
+    { id: 35, q: "35. Which classroom practice best supports the development of inferential reading?", options: { A: "Asking learners to copy sentences", B: "Asking learners to identify only explicitly stated facts", C: "Asking learners to use textual clues to draw conclusions", D: "Asking learners to memorise the passage" }, ans: "C" },
+    { id: 36, q: "36. A teacher wants to assess communicative competence rather than isolated knowledge of grammar. Which task would be most appropriate?", options: { A: "Fill-in-the-blanks", B: "Sentence transformation", C: "Role-play in a real-life situation", D: "Spelling dictation" }, ans: "C" },
+    { id: 37, q: "37. In a multilingual English classroom, allowing learners to occasionally use their home language to discuss a difficult concept can:", options: { A: "Always prevent English learning", B: "Support meaning-making and deeper understanding", C: "Make assessment impossible", D: "Eliminate the need to learn English" }, ans: "B" },
+    { id: 38, q: "38. 'মহর্ষি' শব্দের সন্ধি কী?", options: { A: "মহা + ঋষি", B: "মহ + ঋষি", C: "মহা + র্ষি", D: "মহ + র্ষি" }, ans: "A" },
+    { id: 39, q: "39. ‘দশানন’ শব্দটির সমাস নির্ণয় করুন।", options: { A: "দ্বন্দ্ব", B: "কর্মধারয়", C: "বহুব্রীহি", D: "দ্বিগু" }, ans: "C" },
+    { id: 40, q: "40. ‘যিনি অন্যের উপকার করেন’— এর এক কথায় প্রকাশ কোনটি?", options: { A: "পরনির্ভর", B: "পরোপকারী", C: "পরমুখাপেক্ষী", D: "পরিত্যক্ত" }, ans: "B" },
+    { id: 41, q: "41. 'মানবতা' কোন ধরনের শব্দ?", options: { A: "মৌলিক", B: "সাধিত", C: "সমাসবদ্ধ", D: "যোগরূঢ়" }, ans: "B" },
+    { id: 42, q: "42. ‘অকালকুষ্মাণ্ড’ শব্দটির অর্থ কী?", options: { A: "অসময়ে জন্মানো ফল", B: "অপদার্থ বা অকর্মণ্য ব্যক্তি", C: "অত্যন্ত জ্ঞানী ব্যক্তি", D: "বিপদে সাহায্যকারী ব্যক্তি" }, ans: "B" },
+    { id: 43, q: "43. ‘সে কলম দিয়ে লিখল’— বাক্যে ‘কলম দিয়ে’ কোন কারক নির্দেশ করছে?", options: { A: "কর্মকারক", B: "করণকারক", C: "অপাদান কারক", D: "অধিকরণ কারক" }, ans: "B" },
+    { id: 44, q: "44. ‘যদিও সে দরিদ্র, তবুও সে সৎ’— বাক্যটি কোন ধরনের?", options: { A: "সরল", B: "যৌগিক", C: "জটিল", D: "মিশ্র" }, ans: "D" },
+    { id: 45, q: "45. ‘রাজপুত্র’ শব্দটির সমাস-বিগ্রহ কোনটি?", options: { A: "রাজা ও পুত্র", B: "রাজার পুত্র", C: "রাজসদৃশ পুত্র", D: "রাজাকে যে পুত্র" }, ans: "B" },
+    { id: 46, q: "46. একজন শিক্ষার্থী বাংলা পড়ার সময় প্রতিটি শব্দ আলাদাভাবে উচ্চারণ করে কিন্তু পুরো বাক্যের অর্থ বুঝতে পারে না। শিক্ষক প্রথমে কোন বিষয়টির উপর গুরুত্ব দেবেন?", options: { A: "দ্রুত পড়ার জন্য শাস্তি", B: "শুধুমাত্র বানান মুখস্থ করানো", C: "অর্থপূর্ণ reading ও context-এর মাধ্যমে comprehension গড়ে তোলা", D: "প্রতিটি শব্দ দশবার লিখতে দেওয়া" }, ans: "C" },
+    { id: 47, q: "47. বাংলা ভাষা শিক্ষায় ‘ভাষার চারটি দক্ষতা’ সমন্বিতভাবে শেখানোর প্রধান সুবিধা কী?", options: { A: "শুধুমাত্র পরীক্ষার নম্বর বাড়ে", B: "ভাষার ব্যবহারিক ও সামগ্রিক দক্ষতা বিকশিত হয়", C: "Grammar শেখানোর প্রয়োজন থাকে না", D: "শুধু writing skill বৃদ্ধি পায়" }, ans: "B" },
+    { id: 48, q: "48. একজন শিক্ষক একটি গল্প পড়ানোর পরে শিক্ষার্থীদের জিজ্ঞাসা করেন— “গল্পের শেষে চরিত্রটি অন্য সিদ্ধান্ত নিলে কী হতে পারত?” এই প্রশ্নটি প্রধানত কোন দক্ষতা যাচাই করে?", options: { A: "শুধুমাত্র স্মৃতি", B: "Inferential ও creative thinking", C: "শুধুমাত্র বানান", D: "শুধুমাত্র উচ্চারণ" }, ans: "B" },
+    { id: 49, q: "49. বাংলা ভাষা শেখার সময় কোনো শিক্ষার্থী আঞ্চলিক ভাষার প্রভাবের কারণে কিছু শব্দ ভিন্নভাবে উচ্চারণ করছে। শিক্ষকের সবচেয়ে উপযুক্ত ভূমিকা কী?", options: { A: "তার আঞ্চলিক ভাষাকে ভুল ও নিম্নমানের বলে ঘোষণা করা", B: "তাকে কথা বলতে নিষেধ করা", C: "ভাষাগত বৈচিত্র্যকে সম্মান করে standard form-এর সঙ্গে তুলনা ও অনুশীলনের সুযোগ দেওয়া", D: "তার নম্বর কেটে নেওয়া" }, ans: "C" },
+    { id: 50, q: "50. একজন শিক্ষক শিক্ষার্থীদের লেখা, draft, revision এবং final writing সংরক্ষণ করে সময়ের সঙ্গে তাদের উন্নতি বিশ্লেষণ করেন। এটি কোন assessment strategy-এর উদাহরণ?", options: { A: "Portfolio assessment", B: "Norm-referenced assessment", C: "শুধুমাত্র summative assessment", D: "Oral assessment" }, ans: "A" }
+  ];
+
+  let timeInSeconds = 40 * 60; // 40 minutes
+  let timerInterval;
+
+  function renderQuestions() {
+    const container = document.getElementById('questions-container');
+    container.innerHTML = '';
+
+    questions.forEach((item) => {
+      const card = document.createElement('div');
+      card.className = 'question-card';
+      card.id = `q-card-${item.id}`;
+
+      let optionsHtml = '';
+      for (const [key, val] of Object.entries(item.options)) {
+        optionsHtml += `
+          <li>
+            <label id="lbl-${item.id}-${key}">
+              <input type="radio" name="q${item.id}" value="${key}">
+              ${key}. ${val}
+            </label>
+          </li>
+        `;
+      }
+
+      card.innerHTML = `
+        <div class="question-title">${item.q}</div>
+        <ul class="options-list">${optionsHtml}</ul>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  function startTest() {
+    const name = document.getElementById('student-name').value.trim();
+    const email = document.getElementById('student-email').value.trim();
+
+    if (!name || !email) {
+      alert("Please fill in both Name and Email to start the test.");
+      return;
+    }
+
+    document.getElementById('registration-section').style.display = 'none';
+    document.getElementById('test-section').style.display = 'block';
+
+    renderQuestions();
+    startTimer();
+  }
+
+  function startTimer() {
+    timerInterval = setInterval(() => {
+      timeInSeconds--;
+      let minutes = Math.floor(timeInSeconds / 60);
+      let seconds = timeInSeconds % 60;
+
+      document.getElementById('time-display').innerText = 
+        `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+      if (timeInSeconds <= 0) {
+        clearInterval(timerInterval);
+        alert("Time is up! Your test will be submitted automatically.");
+        submitTest();
+      }
+    }, 1000);
+  }
+
+  function submitTest() {
+    clearInterval(timerInterval);
+
+    let score = 0;
+    const form = document.getElementById('quiz-form');
+    const formData = new FormData(form);
+
+    questions.forEach(item => {
+      const userAns = formData.get(`q${item.id}`);
+      const correctAns = item.ans;
+
+      // Disable inputs after submission
+      const radios = document.getElementsByName(`q${item.id}`);
+      radios.forEach(r => r.disabled = true);
+
+      // $+1$ for correct answer, no negative marking[cite: 1]
+      if (userAns === correctAns) {
+        score++;
+      }
+
+      // Preview coloring: Correct = Green, Wrong attempt = Red[cite: 1]
+      if (userAns) {
+        if (userAns === correctAns) {
+          document.getElementById(`lbl-${item.id}-${userAns}`).classList.add('opt-correct');
+        } else {
+          document.getElementById(`lbl-${item.id}-${userAns}`).classList.add('opt-wrong');
+          document.getElementById(`lbl-${item.id}-${correctAns}`).classList.add('opt-correct');
+        }
+      } else {
+        // If question was skipped, show the correct answer in green
+        document.getElementById(`lbl-${item.id}-${correctAns}`).classList.add('opt-correct');
+      }
+    });
+
+    // Display total result score
+    document.getElementById('result-box').style.display = 'block';
+    document.getElementById('score-text').innerHTML = `Your Score: <strong>${score} / ${questions.length}</strong>`;
+    
+    // Hide top timer and submit button
+    document.getElementById('timer-sticky').style.display = 'none';
+    form.querySelector('button[type="button"]').style.display = 'none';
+
+    // Send result to Google Sheet[cite: 1]
+    sendToGoogleSheet(score);
+  }
+
+  function sendToGoogleSheet(score) {
+    if (GOOGLE_SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL" || !GOOGLE_SCRIPT_URL) {
+      console.warn("Google Apps Script URL is not set. Submissions will not sync to Google Sheets.");
+      return;
+    }
+
+    const name = document.getElementById('student-name').value;
+    const email = document.getElementById('student-email').value;
+
+    const payload = {
+      name: name,
+      email: email,
+      score: score,
+      total: questions.length,
+      timestamp: new Date().toLocaleString()
+    };
+
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(() => console.log("Data successfully posted to Google Apps Script."))
+    .catch(err => console.error("Error connecting to Google Apps Script:", err));
+  }
+</script>
+
+</body>
+</html>
